@@ -1,0 +1,3 @@
+(executable
+ (name ls_rec)
+ (libraries core stdio))
