@@ -1,0 +1,3 @@
+(executable
+ (name unix_services)
+ (libraries core re stdio))
