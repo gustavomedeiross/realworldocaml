@@ -17,21 +17,20 @@ let rec eval expr base_eval =
   | Not expr -> not (eval' expr)
 
 let and_ l =
-  if List.exists l ~f:(function Const false -> true | _ -> false)
-  then Const false
+  if List.exists l ~f:(function Const false -> true | _ -> false) then
+    Const false
   else
     match List.filter l ~f:(function Const true -> false | _ -> true) with
     | [] -> Const true
-    | [x] -> x
+    | [ x ] -> x
     | l -> And l
 
 let or_ l =
-  if List.exists l ~f:(function Const true -> true | _ -> false)
-  then Const true
+  if List.exists l ~f:(function Const true -> true | _ -> false) then Const true
   else
     match List.filter l ~f:(function Const false -> false | _ -> true) with
     | [] -> Const false
-    | [x] -> x
+    | [ x ] -> x
     | l -> Or l
 
 let not_ = function
@@ -40,7 +39,7 @@ let not_ = function
   | (Base _ | And _ | Or _) as e -> Not e
 
 let rec simplify = function
-  | Base _ | Const _ as x -> x
+  | (Base _ | Const _) as x -> x
   | And l -> and_ (List.map l ~f:simplify)
   | Or l -> or_ (List.map l ~f:simplify)
   | Not e -> not_ (simplify e)
