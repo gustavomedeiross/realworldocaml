@@ -1,0 +1,12 @@
+(executable
+ (name json_parser)
+ (libraries core))
+
+(ocamllex lexer)
+
+(menhir (modules parser))
+
+; (rule
+ ; (targets json_parser.ml)
+ ; (deps parser.mly)
+ ; (action (ignore-stderr (run menhir --external-tokens Json --explain ${<}))))
