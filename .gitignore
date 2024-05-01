@@ -1,3 +1,9 @@
+# direnv
+.envrc
+.direnv
+
+# ocaml
+
 *.annot
 *.cmo
 *.cma
